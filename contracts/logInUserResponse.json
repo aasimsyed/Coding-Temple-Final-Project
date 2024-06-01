@@ -1,0 +1,40 @@
+{
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "type": "object",
+      "properties": {
+        "user": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string"
+            },
+            "firstName": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string",
+              "format": "email"
+            },
+            "__v": {
+              "type": "integer"
+            }
+          },
+          "required": ["_id", "firstName", "lastName", "email", "__v"]
+        },
+        "token": {
+          "type": "string"
+        }
+      },
+      "required": ["user", "token"]
+    }
+  }
+}
