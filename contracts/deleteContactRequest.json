@@ -1,7 +1,7 @@
 {
   "request": {
     "method": "DELETE",
-    "url": "https://thinking-tester-contact-list.herokuapp.com/contacts/{{contactId}}",
+    "url": "/contacts/{{contactId}}",
     "headers": {
       "Authorization": "Bearer {{token}}",
       "Content-Type": "application/json"

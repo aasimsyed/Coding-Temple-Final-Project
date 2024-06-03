@@ -1,7 +1,7 @@
 {
   "request": {
     "method": "PATCH",
-    "url": "https://thinking-tester-contact-list.herokuapp.com/users/me",
+    "url": "/users/me",
     "headers": {
       "Authorization": "Bearer {{token}}",
       "Content-Type": "application/json"

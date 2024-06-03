@@ -3,7 +3,7 @@ const { defineConfig } = require("cypress");
 module.exports = defineConfig({
   e2e: {
     env: {
-      restfulBookerUrl: 'https://thinking-tester-contact-list.herokuapp.com'
+      contactListUrl: 'https://thinking-tester-contact-list.herokuapp.com'
     },
     chromeWebSecurity: false,
     supportFile: 'cypress/support/commands.js',

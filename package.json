@@ -10,6 +10,7 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@types/faker": "^6.6.9",
     "cypress": "^13.10.0",
     "faker": "^5.5.3"
   }

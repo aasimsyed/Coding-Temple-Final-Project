@@ -1,7 +1,7 @@
 {
   "request": {
     "method": "POST",
-    "url": "https://thinking-tester-contact-list.herokuapp.com/users",
+    "url": "/users",
     "headers": {
       "Content-Type": "application/json"
     },
