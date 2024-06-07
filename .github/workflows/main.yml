@@ -1,0 +1,54 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - test-type: 'api'
+          - test-type: 'e2e'
+          - test-type: 'security'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Cache Cypress binary
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/Cypress
+          key: cypress-${{ runner.os }}-binary-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: cypress-${{ runner.os }}-binary-
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '21'
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Install Cypress binary
+        run: npm install cypress
+      
+      - name: Verify Cypress binary
+        run: npx cypress verify
+      
+      - name: Run API tests
+        if: ${{ matrix.test-type == 'api' }}
+        run: npx cypress run --spec "cypress/integration/api/**/*"
+      
+      - name: Run e2e tests
+        if: ${{ matrix.test-type == 'e2e' }}
+        run: npx cypress run --spec "cypress/integration/e2e/**/*"
+
+      - name: Run security tests
+        if: ${{ matrix.test-type == 'security' }}
+        uses: zaproxy/action-baseline@v0.12.0
+        with:
+          target: "https://thinking-tester-contact-list.herokuapp.com/"
+          artifact_name: "zap_report.html"

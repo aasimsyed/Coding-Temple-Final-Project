@@ -9,7 +9,7 @@ jobs:
   zap_scan:
     permissions: write-all
     runs-on: ubuntu-latest
-    name: OWASP ZAP Baseline Scan of OWASP Juice Shop
+    name: OWASP ZAP Baseline Scan of Contact List App
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
