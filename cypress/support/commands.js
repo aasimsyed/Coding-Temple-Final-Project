@@ -23,3 +23,27 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+const { login, getUser } = require('../utils/userUtils');
+const { loadContracts } = require('../utils/contractLoader');
+const { userContractNames } = require('../utils/contractNames');
+const contracts = loadContracts(userContractNames);
+import validUser from '../fixtures/validUser.json';
+
+Cypress.Commands.add('loggedIn', () => {
+  return cy.getCookie('token').then((cookie) => {
+    if (cookie && cookie.value) {
+      return getUser(cookie.value).then((response) => {
+        return response.status === contracts.getUserProfileResponse.response.status;
+      });
+    } else {
+      return false;
+    }
+  });
+});
+
+Cypress.Commands.add('login', () => {
+  login(validUser.email, validUser.password).then((response) => {
+    cy.setCookie('token', response.body.token);
+  });
+});
