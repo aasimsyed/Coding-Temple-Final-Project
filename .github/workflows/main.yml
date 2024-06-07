@@ -17,6 +17,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      
+      - name: Install dependencies
+        run: npm install
+      
       - name: Cache Cypress binary
         uses: actions/cache@v2
         with:
@@ -24,17 +32,9 @@ jobs:
           key: cypress-${{ runner.os }}-binary-${{ hashFiles('**/package-lock.json') }}
           restore-keys: cypress-${{ runner.os }}-binary-
       
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '21'
-      
-      - name: Install dependencies
-        run: npm install
-      
       - name: Install Cypress binary
-        run: npm install cypress
-      
+        run: npx cypress install
+
       - name: Verify Cypress binary
         run: npx cypress verify
       
